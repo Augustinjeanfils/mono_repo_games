@@ -48,8 +48,11 @@ let snake = [
 window.addEventListener("keydown", changeDirection);
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 window.addEventListener("click", resetGame); // KOLO 
 
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 function gameStart() {
