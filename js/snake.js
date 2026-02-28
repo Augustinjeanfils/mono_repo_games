@@ -27,6 +27,10 @@ let foodX; // X-coordinate of the food
 let foodY; // Y-coordinate of the food
 let gameSpeed = 300; // Initial speed of the game in milliseconds
 
+let btnPlayAgain = document.getElementById('btnPlayAgain')
+
+let prevScore = localStorage.getItem("snakeHighScore") || 0;
+
 /**
  Sa e kote koulev lan ki gen 5 segman, kò a kòmanse nan pozisyon (0, 40) epi gen de segman ki swiv li. Chak segman reprezante yon pati nan kò a, ak premye segman an se tèt la.
 */
@@ -43,10 +47,14 @@ let snake = [
 */
 window.addEventListener("keydown", changeDirection);
 
+<<<<<<< Updated upstream
 window.addEventListener("click", resetGame); // KOLO 
 
+=======
+>>>>>>> Stashed changes
 function gameStart() {
     isRunning = true;
+    // btnPlayAgain  // hide button here
     createFood();
     drawFood();
     // handle score hereh
@@ -68,6 +76,7 @@ function nextTick() {
         }, gameSpeed);
     } else {
         displayGameOver();
+        storeScorLocal()
     }
 }
 
@@ -169,6 +178,7 @@ function isSelfcollision(){
 
 function resetGame() { 
     score = 0;
+    gameSpeed = 300;
     xVelocity = initSize;
     yVelocity = 0;
     snake = [
@@ -186,23 +196,9 @@ function displayGameOver() {
     context.font = "50px sans-serif";
     context.fillStyle = "red";
     context.textAlign = "center";
-    context.fillText("Game Over!", gameWidth / 2, gameHeight / 2);  
+    context.fillText("Game Over!", gameWidth / 2, gameHeight / 2)
 
-    const playAgainButton = document.createElement("button");
-    playAgainButton.innerText = "Play Again";
-    playAgainButton.style.position = "absolute";
-    playAgainButton.style.top = `${gameBoard.offsetTop + gameHeight + 20}px`;
-    playAgainButton.style.left = `${gameBoard.offsetLeft + gameWidth / 2}px`;
-    playAgainButton.style.transform = "translate(-50%, 0)";
-    playAgainButton.style.padding = "10px 20px";
-    playAgainButton.style.fontSize = "16px";
-
-    document.body.appendChild(playAgainButton);
-
-    playAgainButton.addEventListener("click", () => {
-        document.body.removeChild(playAgainButton);
-        resetGame();
-    });
+    // show button here
 }
 
 function drawScore() {
@@ -214,7 +210,11 @@ function drawScore() {
     context.font = "20px sans-serif";
     context.fillStyle = "white";
     context.textAlign = "left";
-    context.fillText("Score: " + score, 10, 20);
+
+    context.fillText("Score: " + score, 10 ,20);
+
+    context.fillText( `Max Score: ${prevScore}` , 120 ,20);
+   // context.fillText(`Score: ${score}  | HighScore ${highScore}`, 10 , 20);
 }
 
 // Step - by - step explanation
@@ -257,4 +257,13 @@ function clearBoard() {
     context.fillRect(0, 0, gameWidth, gameHeight);
 }
 
+function storeScorLocal(){
+    let scoreToSave  = Math.max(prevScore, score)
+    localStorage.setItem("snakeHighScore",scoreToSave)
+}
+
 gameStart();
+
+function playAgain(){
+    resetGame();
+}

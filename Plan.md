@@ -50,3 +50,11 @@
 - Add sound effects
 - Implement difficulty levels
 - Add mobile controls
+
+## Game physic
+-  Play with a ball 
+-  Objectif learn animation
+-  sin - lerf 
+
+Pratice
+- Generate flech pou touye kole v lan
